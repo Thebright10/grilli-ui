@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed - Grilli Restaurant</title>
+    <meta name="description" content="Your table booking at Grilli Restaurant is confirmed.">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Forum&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8c97a;
+            --dark: #0d0d0d;
+            --dark-2: #1a1a1a;
+            --dark-3: #252525;
+            --white: #ffffff;
+            --white-70: rgba(255,255,255,0.7);
+            --white-20: rgba(255,255,255,0.2);
+            --success: #4caf84;
+            --ff-forum: 'Forum', cursive;
+            --ff-sans: 'DM Sans', sans-serif;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--ff-sans);
+            background-color: var(--dark);
+            color: var(--white);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: radial-gradient(ellipse at top, #1a1200 0%, #0d0d0d 60%);
+        }
+
+        /* ---- RECEIPT CARD ---- */
+        .receipt-wrapper {
+            width: 100%;
+            max-width: 680px;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .receipt-card {
+            background: var(--dark-2);
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(201,168,76,0.05);
+        }
+
+        /* --- HEADER --- */
+        .receipt-header {
+            background: linear-gradient(135deg, #1a1200, #2a1e00);
+            padding: 36px 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(201,168,76,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .receipt-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 0 30px rgba(201,168,76,0.4);
+        }
+
+        .success-icon svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--dark);
+            stroke-width: 3;
+            fill: none;
+        }
+
+        .receipt-header h1 {
+            font-family: var(--ff-forum);
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .receipt-header p {
+            color: var(--white-70);
+            font-size: 15px;
+        }
+
+        /* --- BOOKING NUMBER BADGE --- */
+        .booking-number-section {
+            padding: 24px 40px;
+            background: linear-gradient(90deg, rgba(201,168,76,0.08), rgba(201,168,76,0.04), rgba(201,168,76,0.08));
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .booking-number-label {
+            font-size: 13px;
+            color: var(--white-70);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .booking-number {
+            font-family: var(--ff-forum);
+            font-size: 28px;
+            color: var(--gold);
+            letter-spacing: 3px;
+        }
+
+        .booking-status {
+            background: rgba(76, 175, 132, 0.15);
+            border: 1px solid rgba(76, 175, 132, 0.4);
+            color: #4caf84;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* --- DETAILS GRID --- */
+        .receipt-body {
+            padding: 36px 40px;
+        }
+
+        .section-title {
+            font-family: var(--ff-forum);
+            font-size: 20px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(201,168,76,0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title svg {
+            width: 20px; height: 20px;
+            stroke: var(--gold); fill: none; stroke-width: 2;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .detail-item {
+            background: var(--dark-3);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 16px 20px;
+            transition: border-color 0.3s;
+        }
+
+        .detail-item:hover { border-color: rgba(201,168,76,0.25); }
+
+        .detail-item.full-width { grid-column: 1 / -1; }
+
+        .detail-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* --- RESTAURANT INFO --- */
+        .restaurant-info {
+            background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 28px;
+        }
+
+        .restaurant-info p {
+            font-size: 14px;
+            color: var(--white-70);
+            line-height: 1.8;
+        }
+
+        .restaurant-info strong {
+            color: var(--gold-light);
+        }
+
+        /* --- ACTIONS --- */
+        .receipt-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary-gold {
+            flex: 1;
+            min-width: 160px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--dark);
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: var(--ff-sans);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201,168,76,0.4);
+        }
+
+        .btn-primary-gold svg {
+            width: 18px; height: 18px; stroke: var(--dark); fill: none; stroke-width: 2.5;
+        }
+
+        .btn-outline {
+            flex: 1;
+            min-width: 160px;
+            background: transparent;
+            color: var(--white);
+            border: 1px solid var(--white-20);
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: var(--ff-sans);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline svg {
+            width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2;
+        }
+
+        /* --- FOOTER NOTE --- */
+        .receipt-footer {
+            padding: 20px 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .receipt-footer p {
+            font-size: 13px;
+            color: var(--white-70);
+        }
+
+        /* --- PRINT STYLES --- */
+        @media print {
+            body { background: white; color: black; }
+            .receipt-card { box-shadow: none; border: 1px solid #ccc; }
+            .receipt-header { background: #1a1200 !important; color: white !important; }
+            .receipt-actions { display: none; }
+            .receipt-footer { display: none; }
+        }
+
+        @media (max-width: 520px) {
+            .receipt-body, .receipt-header, .booking-number-section, .receipt-footer { padding: 24px 20px; }
+            .details-grid { grid-template-columns: 1fr; }
+            .booking-number { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="receipt-wrapper">
+    <div class="receipt-card" id="receipt-card">
+
+        <!-- Header -->
+        <div class="receipt-header">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h1>Booking Confirmed!</h1>
+            <p>Your table has been successfully reserved at Grilli Restaurant</p>
+        </div>
+
+        <!-- Booking Number -->
+        <div class="booking-number-section">
+            <div>
+                <div class="booking-number-label">Booking Reference</div>
+                <div class="booking-number"></div>
+            </div>
+            <div class="booking-status">✓ CONFIRMED</div>
+        </div>
+
+        <!-- Body -->
+        <div class="receipt-body">
+
+            <div class="section-title">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Guest Information
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Guest Name</div>
+                    <div class="detail-value"></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Phone Number</div>
+                    <div class="detail-value"></div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Account</div>
+                    <div class="detail-value">Guest</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Email</div>
+                    <div class="detail-value"></div>
+                </div>
+                
+            </div>
+
+            <div class="section-title" style="margin-top: 10px;">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Reservation Details
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Date</div>
+                    <div class="detail-value"></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Time</div>
+                    <div class="detail-value"></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Number of Guests</div>
+                    <div class="detail-value"> Person</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Booking ID</div>
+                    <div class="detail-value" style="color: var(--gold);">#</div>
+                </div>
+                
+                <div class="detail-item full-width">
+                    <div class="detail-label">Special Request</div>
+                    <div class="detail-value" style="font-size: 14px; color: rgba(255,255,255,0.8);"></div>
+                </div>
+                
+            </div>
+
+            <!-- Restaurant Info -->
+            <div class="restaurant-info">
+                <p>
+                    <strong>📍 Location:</strong> Shakespeare Sarani Rd, Park Street area, Kolkata, West Bengal 700071<br>
+                    <strong>📞 Contact:</strong> +91 8276955297 &nbsp;|&nbsp; <strong>✉ Email:</strong> booking@restaurant.com<br>
+                    <strong>⏰ Hours:</strong> Mon–Sun, 8:00 AM – 10:00 PM
+                </p>
+            </div>
+
+            <!-- Actions -->
+            <div class="receipt-actions">
+                <button class="btn-primary-gold" onclick="downloadPDF()">
+                    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Download PDF Receipt
+                </button>
+                <a href="index.html" class="btn-outline">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    Back to Home
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="receipt-footer">
+            <p>Please show this confirmation (or your booking number <strong></strong>) upon arrival. Thank you for choosing Grilli Restaurant!</p>
+        </div>
+    </div>
+</div>
+
+<!-- jsPDF CDN for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+function downloadPDF() {
+    const { jsPDF } = window.htmldf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+    // Dark background
+    doc.setFillColor(26, 18, 0);
+    doc.rect(0, 0, 210, 297, 'F');
+
+    // Gold header bar
+    doc.setFillColor(201, 168, 76);
+    doc.rect(0, 0, 210, 45, 'F');
+
+    // Restaurant Name
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(28);
+    doc.setTextColor(26, 18, 0);
+    doc.text('GRILLI RESTAURANT', 105, 22, { align: 'center' });
+
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Table Booking Confirmation', 105, 34, { align: 'center' });
+
+    // Success badge
+    doc.setFillColor(37, 37, 37);
+    doc.roundedRect(55, 52, 100, 20, 5, 5, 'F');
+    doc.setTextColor(76, 175, 132);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.text('✓  BOOKING CONFIRMED', 105, 65, { align: 'center' });
+
+    // Booking Number
+    doc.setTextColor(201, 168, 76);
+    doc.setFontSize(11);
+    doc.text('BOOKING REFERENCE', 105, 82, { align: 'center' });
+    doc.setFontSize(22);
+    doc.text('', 105, 93, { align: 'center' });
+
+    // Divider line
+    doc.setDrawColor(201, 168, 76);
+    doc.setLineWidth(0.5);
+    doc.line(20, 100, 190, 100);
+
+    // Guest Information Section
+    doc.setTextColor(201, 168, 76);
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.text('GUEST INFORMATION', 20, 115);
+
+    const fields = [
+        ['Guest Name',   ''],
+        ['Phone Number', ''],
+        
+        ['Account',      'Guest'],
+        ['Email',        ''],
+        
+    ];
+
+    let y = 125;
+    doc.setFont('helvetica', 'normal');
+    fields.forEach(([label, value]) => {
+        doc.setTextColor(160, 140, 80);
+        doc.setFontSize(9);
+        doc.text(label.toUpperCase(), 20, y);
+        doc.setTextColor(240, 240, 240);
+        doc.setFontSize(12);
+        doc.text(value, 20, y + 7);
+        y += 20;
+    });
+
+    // Divider
+    doc.line(20, y + 2, 190, y + 2);
+    y += 12;
+
+    // Reservation Details Section
+    doc.setTextColor(201, 168, 76);
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.text('RESERVATION DETAILS', 20, y);
+    y += 12;
+
+    const bookingFields = [
+        ['Date',             ''],
+        ['Time',             ''],
+        ['Number of Guests', ' Person'],
+        ['Booking ID',       '#'],
+    ];
+
+    // Two-column layout
+    let col1Y = y, col2Y = y;
+    bookingFields.forEach(([label, value], i) => {
+        const xPos = i % 2 === 0 ? 20 : 110;
+        const currentY = i % 2 === 0 ? col1Y : col2Y;
+
+        doc.setTextColor(160, 140, 80);
+        doc.setFontSize(9);
+        doc.setFont('helvetica', 'normal');
+        doc.text(label.toUpperCase(), xPos, currentY);
+        doc.setTextColor(240, 240, 240);
+        doc.setFontSize(12);
+        doc.text(value, xPos, currentY + 7);
+
+        if (i % 2 === 0) col1Y += 20; else col2Y += 20;
+    });
+
+    y = Math.max(col1Y, col2Y) + 10;
+
+    
+    doc.setTextColor(160, 140, 80);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.text('SPECIAL REQUEST', 20, y);
+    doc.setTextColor(240, 240, 240);
+    doc.setFontSize(11);
+    doc.text('', 20, y + 7);
+    y += 25;
+    
+
+    // Restaurant Info Box
+    doc.setFillColor(37, 37, 37);
+    doc.roundedRect(15, y + 5, 180, 38, 4, 4, 'F');
+    doc.setDrawColor(201, 168, 76);
+    doc.setLineWidth(0.3);
+    doc.roundedRect(15, y + 5, 180, 38, 4, 4, 'S');
+
+    doc.setTextColor(201, 168, 76);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text('RESTAURANT INFORMATION', 105, y + 15, { align: 'center' });
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(200, 200, 200);
+    doc.setFontSize(9);
+    doc.text('Shakespeare Sarani Rd, Park Street, Kolkata, West Bengal 700071', 105, y + 24, { align: 'center' });
+    doc.text('+91 8276955297  |  booking@restaurant.com  |  Mon-Sun: 8 AM - 10 PM', 105, y + 33, { align: 'center' });
+
+    // Footer
+    doc.setFillColor(201, 168, 76);
+    doc.rect(0, 280, 210, 17, 'F');
+    doc.setTextColor(26, 18, 0);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Please present this receipt upon arrival. Thank you for choosing Grilli Restaurant!', 105, 291, { align: 'center' });
+
+    doc.save('Grilli-Booking-.pdf');
+}
+</script>
+</body>
+</html>
+

@@ -1,0 +1,112 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Grilli Restaurant</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    
+    <style>
+        .profile-section {
+            padding-block: 150px 100px;
+            background-color: var(--eerie-black-1);
+            min-height: 100vh;
+        }
+        .profile-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--eerie-black-2);
+            padding: 50px;
+            border-radius: 12px;
+            border: 1px solid var(--gold-crayola);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid var(--white-alpha-20);
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background-color: var(--gold-crayola);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: var(--eerie-black-1);
+            font-family: var(--ff-forum);
+        }
+        .profile-info h3 {
+            color: var(--gold-crayola);
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        .profile-info p {
+            color: var(--white);
+            font-size: var(--fs-5);
+        }
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="topbar">
+        <div class="container">
+            <a href="index.html" class="topbar-item link">
+                <span class="span">← Back to Home</span>
+            </a>
+        </div>
+    </div>
+
+    <section class="profile-section">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    
+                </div>
+                <div class="profile-info">
+                    <h3 class="headline-1">Guest</h3>
+                    <p></p>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="title-2" style="color: var(--white); margin-bottom: 20px;">My Bookings</h4>
+                <p class="body-2">Your recent table reservations will appear here.</p>
+                <!-- In a full implementation, you would fetch bookings from the database here -->
+                <div style="padding: 20px; border: 1px dashed var(--white-alpha-20); margin-top: 15px; text-align: center; border-radius: 8px;">
+                    <p style="color: var(--white-alpha-50);">No recent bookings found.</p>
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <a href="index.html#reservation" class="btn btn-primary">
+                    <span class="text text-1">Book a Table</span>
+                    <span class="text text-2" aria-hidden="true">Book a Table</span>
+                </a>
+                <a href="LogoutController" class="btn btn-secondary">
+                    <span class="text text-1">Logout</span>
+                    <span class="text text-2" aria-hidden="true">Logout</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+
